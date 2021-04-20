@@ -6,7 +6,12 @@ defmodule Slivovitz.Cms.CommentQueries do
 
   def with_id(query \\ base(), id) do
     query
-    |> where([post], post.id == ^id)
+    |> where([comment], comment.id == ^id)
+  end
+
+  def approved(query \\ base()) do
+    query
+    |> where([comment], comment.approved == true)
   end
 
   defp base, do: Comment

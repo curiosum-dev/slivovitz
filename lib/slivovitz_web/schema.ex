@@ -1,13 +1,14 @@
 defmodule SlivovitzWeb.Schema do
   use Absinthe.Schema
 
-  alias SlivovitzWeb.Resolvers
   alias Slivovitz.Repo
+  alias SlivovitzWeb.Resolvers
+  alias SlivovitzWeb.Dataloaders.CmsDataloader
 
   def context(ctx) do
     loader =
       Dataloader.new()
-      |> Dataloader.add_source(Repo, Dataloader.Ecto.new(Repo))
+      |> Dataloader.add_source(Repo, CmsDataloader.data())
 
     Map.put(ctx, :loader, loader)
   end

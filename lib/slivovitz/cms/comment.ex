@@ -7,6 +7,7 @@ defmodule Slivovitz.Cms.Comment do
   schema "cms_comments" do
     field :author, :string
     field :content, :string
+    field :approved, :boolean
 
     belongs_to :post, Post
 
@@ -18,5 +19,10 @@ defmodule Slivovitz.Cms.Comment do
     comment
     |> cast(attrs, [:author, :content, :post_id])
     |> validate_required([:author, :content, :post_id])
+  end
+
+  def approve_changeset(comment) do
+    comment
+    |> change(%{approved: true})
   end
 end

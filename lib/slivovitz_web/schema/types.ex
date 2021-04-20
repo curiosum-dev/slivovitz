@@ -12,6 +12,8 @@ defmodule SlivovitzWeb.Schema.Types do
     field :content, :string
 
     field :comments, list_of(:comment) do
+      arg(:show_unapproved, :boolean, default_value: false)
+
       resolve(dataloader(Repo))
     end
   end
@@ -21,5 +23,6 @@ defmodule SlivovitzWeb.Schema.Types do
     field :id, :id
     field :author, :string
     field :content, :string
+    field :approved, :boolean
   end
 end
